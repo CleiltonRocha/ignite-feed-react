@@ -5,13 +5,15 @@ import { Comment } from './Comment'
 import styles from './Post.module.css'
 import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
 
-
-//estado: variáveis que eu quero que o componente monitore.
-
-interface PostProps {
+export interface PostType {
+  id: number
   author: AuthorProps
   publishedAt: Date
   content: ContentProps[]
+}
+
+interface PostProps {
+  post: PostType
 }
 
 interface AuthorProps {
@@ -25,7 +27,7 @@ interface ContentProps {
   content: string
 }
 
-export function Post( { author, publishedAt, content }: PostProps) {
+export function Post( { post }: PostProps) {
 
   const [comments, setComments] = useState([
     'Post muito bacana Hein?!'
@@ -49,7 +51,6 @@ export function Post( { author, publishedAt, content }: PostProps) {
   }
 
   function deleteComment(commentToDelete: string){
-
     const commentsWithoutDeleteOne = comments.filter(comment => {
       return comment != commentToDelete
     })
@@ -57,33 +58,35 @@ export function Post( { author, publishedAt, content }: PostProps) {
     setComments(commentsWithoutDeleteOne)
   }
 
-  const publishedDateFormated = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+  const publishedDateFormated = format(post.publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
     locale: ptBR
   });
-  const publisheDateRelativeToNow = formatDistanceToNow(publishedAt, {
+
+  const publisheDateRelativeToNow = formatDistanceToNow(post.publishedAt, {
     locale: ptBR,
     addSuffix: true
-  })
+  });
+  
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-            <Avatar src={author.avatarUrl} alt=""/>
+            <Avatar src={post.author.avatarUrl} alt=""/>
 
             <div className={styles.authorInfo}>
-                <strong>{author.name}</strong>
-                <span>{author.role}</span>
+                <strong>{post.author.name}</strong>
+                <span>{post.author.role}</span>
             </div>
         </div>
 
-        <time title={publishedDateFormated} dateTime={publishedAt.toISOString()}>
+        <time title={publishedDateFormated} dateTime={post.publishedAt.toISOString()}>
           {publisheDateRelativeToNow}
         </time>
       </header>
 
       <div className={styles.content}>
         {
-          content.map(line => {
+          post.content.map(line => {
             if (line.type === 'paragraph') {
               return <p key={line.content}>{line.content}</p>;
             }
@@ -109,6 +112,7 @@ export function Post( { author, publishedAt, content }: PostProps) {
           <button type="submit">Publicar</button>
         </footer>
       </form>
+      
       <div className={styles.commentList}>
         {
           comments.map(comment => {

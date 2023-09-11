@@ -9,11 +9,12 @@ export function Sidebar() {
             <img 
                 src={coverImg}
                 className={styles.cover}
-            
             />
 
             <div className={styles.profile}>
-                <Avatar src="https://github.com/CleiltonRocha.png" />
+                <div className={styles.customStylesAvatar}>
+                    <Avatar src="https://github.com/CleiltonRocha.png" />
+                </div>
                 <strong>Cleilton Rocha</strong>
                 <span>Web Developer</span>
             </div>

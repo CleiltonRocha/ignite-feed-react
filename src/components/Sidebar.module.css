@@ -12,6 +12,10 @@
     object-fit: cover;
 }
 
+.customStylesAvatar {
+    margin-top: -2rem;
+}
+
 .profile {
     display: flex;
     flex-direction: column;
