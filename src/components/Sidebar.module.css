@@ -64,3 +64,9 @@
     background: var(--green-500);
     color: var(--white);
 }
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        position: static;
+    }
+}
