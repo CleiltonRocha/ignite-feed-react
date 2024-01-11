@@ -12,7 +12,9 @@ Ignite Feed is an application that allows adding comments to a post, using React
 In the video below, I show you how the application works with more details.
 
 
-https://github.com/CleiltonRocha/ignite-feed-react/assets/101843883/bf514f54-7268-4836-b007-d300072ef3d7
+https://github.com/CleiltonRocha/ignite-feed-react/assets/101843883/610a20b6-7a74-4eef-bc44-ca8a827cde8e
+
+
 
 
 
